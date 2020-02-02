@@ -55,7 +55,7 @@ class ESS_Component {
 			?>
 			<th scope="col">
 				<a href="<?php echo '/' . $post_type . '/?order_key=' . $field . '&order=' . $link_order; ?>">
-					<?php echo get_field_object($field)['label'] ?>
+					<?php echo $field_obj['label']; // get_field_object($field)['label'] ?>
 
 					<?php if ($meta_key == $field && $link_order == 'ASC') { ?>
 					<i class="fa fa-angle-up" aria-hidden="true"></i>
@@ -86,7 +86,7 @@ class ESS_Component {
 				<?php echo get_field($field, $post_id); ?>
 			</a>
 			
-			<?php } elseif ($is_rel) { ?>
+			<?php } elseif ($is_rel) { if (get_field($field, $post_id)) { ?>
 			
 				<?php foreach(get_field($field, $post_id) as $f) {  ?>
 
@@ -94,7 +94,7 @@ class ESS_Component {
 					<?php echo get_the_title($f); ?>
 				</a>
 
-				<?php } ?>
+				<?php } } ?>
 			
 			<?php } else { ?>
 			
