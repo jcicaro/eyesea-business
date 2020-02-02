@@ -1,0 +1,85 @@
+<?php get_header(); ?>
+
+	<?php acf_form(array(
+		'post_id'		=> 'new_post',
+		'post_title'	=> false,
+		'post_content'	=> false,
+		'form' => true,
+		'html_submit_button'  => '<div class="acf-fields"><div class="acf-field"><input type="submit" class="acf-button button button-primary button-large btn btn-primary"" value="%s" /></div></div>',
+        'new_post'		=> array(
+			'post_type'		=> 'income',
+			'post_status'	=> 'publish'
+		)
+	)); ?>
+
+	<br>
+
+	<?php acf_form(array(
+		'post_id'		=> 'new_post',
+		'post_title'	=> false,
+		'post_content'	=> false,
+		'form' => true,
+		'html_submit_button'  => '<div class="acf-fields"><div class="acf-field"><input type="submit" class="acf-button button button-primary button-large btn btn-primary"" value="%s" /></div></div>',
+        'new_post'		=> array(
+			'post_type'		=> 'invoice',
+			'post_status'	=> 'publish'
+		)
+	)); ?>
+
+	<br>
+
+    <?php acf_form(array(
+		'post_id'		=> 'new_post',
+		'post_title'	=> false,
+		'post_content'	=> false,
+		'form' => true,
+		'html_submit_button'  => '<div class="acf-fields"><div class="acf-field"><input type="submit" class="acf-button button button-primary button-large btn btn-primary"" value="%s" /></div></div>',
+        'new_post'		=> array(
+			'post_type'		=> 'expense',
+			'post_status'	=> 'publish'
+		)
+	)); ?>
+
+	<br>
+
+	<?php acf_form(array(
+		'post_id'		=> 'new_post',
+		'post_title'	=> false,
+		'post_content'	=> false,
+		'form' => true,
+		'html_submit_button'  => '<div class="acf-fields"><div class="acf-field"><input type="submit" class="acf-button button button-primary button-large btn btn-primary"" value="%s" /></div></div>',
+        'new_post'		=> array(
+			'post_type'		=> 'customer',
+			'post_status'	=> 'publish'
+		)
+	)); ?>
+
+	<br>
+
+	<?php acf_form(array(
+		'post_id'		=> 'new_post',
+		'post_title'	=> false,
+		'post_content'	=> false,
+		'form' => true,
+		'html_submit_button'  => '<div class="acf-fields"><div class="acf-field"><input type="submit" class="acf-button button button-primary button-large btn btn-primary"" value="%s" /></div></div>',
+        'new_post'		=> array(
+			'post_type'		=> 'vendor',
+			'post_status'	=> 'publish'
+		)
+	)); ?>
+
+<br>
+
+	<?php acf_form(array(
+		'post_id'		=> 'new_post',
+		'post_title'	=> false,
+		'post_content'	=> false,
+		'form' => true,
+		'html_submit_button'  => '<div class="acf-fields"><div class="acf-field"><input type="submit" class="acf-button button button-primary button-large btn btn-primary"" value="%s" /></div></div>',
+        'new_post'		=> array(
+			'post_type'		=> 'workshop',
+			'post_status'	=> 'publish'
+		)
+	)); ?>
+
+<?php get_footer(); ?>

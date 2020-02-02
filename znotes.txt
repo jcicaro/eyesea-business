@@ -1,0 +1,87 @@
+
+======================================
+URLs
+======================================
+
+https://wpmain-jci.codeanyapp.com/wp-login.php
+
+https://wpmain-jci.codeanyapp.com/?post_type=expense
+
+https://wpmain-jci.codeanyapp.com/wp-json/test/v1/create
+
+======================================
+Notes
+======================================
+
+The ServiceNow integration info is in wp-config.php
+
+
+======================================
+Manual
+======================================
+
+- Create Custom Fields
+- Set up user and roles
+
+
+======================================
+Temp
+======================================
+
+<?php 
+		
+			
+				
+			if ($col_num == 0) { ?> 
+			
+			<a href="<?php // the_permalink(); ?>">
+				<?php echo // get_field($field, $post_id); ?>
+			</a>
+			
+			<?php }
+				elseif ($is_rel) { ?>
+				
+			<a href="<?php // echo get_permalink(get_field($field, $post_id, false); ?>">
+				<?php // echo get_field($field, $post_id); ?>
+			</a>
+			
+			<?php }
+				
+			
+			?>
+			<?php else { ?>
+				<?php 
+					echo get_field($field, $post_id); 
+				?>
+			<?php } ?>
+
+========
+
+public static function the_cell($post_id, $field_obj, $col_num) {
+		$field = $field_obj['name'];
+		$is_rel = $field_obj['is_relationship'] == true;
+		$href = get_the_permalink();
+		if ($is_rel) {
+			$href = get_permalink(get_field($field, $post_id, false));
+		}
+		$show_link = $col_num == 0 || $is_rel;
+		?>
+
+		<td>
+			<?php 
+		
+			if ($show_link) { 
+			
+			?>
+			<a href="<?php echo $href; ?>">
+				<?php echo ESS_Helper::to_string(get_field($field, $post_id)); ?>
+			</a>
+			<?php } else { ?>
+				<?php 
+					echo get_field($field, $post_id); 
+				?>
+			<?php } ?>
+		</td>
+
+		<?php
+	}
