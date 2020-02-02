@@ -37,8 +37,9 @@ class ESS_Component {
 	}
 	
 	public static function the_table_header() {
-		$meta_key = $_GET['order_key'];
-		$order = $_GET['order'] ?? 'ASC';
+		
+		$meta_key = array_key_exists('order_key', $_GET) ? $_GET['order_key'] : '';
+		$order = array_key_exists('order', $_GET) ? $_GET['order'] : 'ASC';
 		$link_order = $order == 'ASC' ? 'DESC' : 'ASC';
 
 		$post_type = is_archive() ? get_queried_object()->name : '';
@@ -108,8 +109,8 @@ class ESS_Component {
 	
 	public static function the_table_rows() {
 		
-		$meta_key = $_GET['order_key'];
-		$order = $_GET['order'] ?? 'ASC';
+		$meta_key = array_key_exists('order_key', $_GET) ? $_GET['order_key'] : '';
+		$order = array_key_exists('order', $_GET) ? $_GET['order'] : 'ASC';
 
 		$post_type = is_archive() ? get_queried_object()->name : '';
 		$class_name = ESS_Post::get_class_name($post_type);

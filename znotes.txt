@@ -9,6 +9,9 @@ https://wpmain-jci.codeanyapp.com/?post_type=expense
 
 https://wpmain-jci.codeanyapp.com/wp-json/test/v1/create
 
+
+git remote add origin https://github.com/jcicaro/eyesea-business.git
+
 ======================================
 Notes
 ======================================
