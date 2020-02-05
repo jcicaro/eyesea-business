@@ -2,10 +2,8 @@
 
 class ESS_Component {
 	
-	public static function the_acf_form() {
+	public static function the_acf_form($post_id, $post_type) {
 
-		$post_id = is_single() ? get_the_ID() : 'new_post';	
-		$post_type = is_single() ? get_post_type($post_id) : get_queried_object()->name; // 'expense';
 		$post_type_label = is_archive() ? get_queried_object()->labels->singular_name : get_post_type_object($post_type)->labels->singular_name; 
 		
 		?>
