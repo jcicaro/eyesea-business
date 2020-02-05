@@ -1,5 +1,5 @@
 <?php get_header(); ?>
 
-<?php get_template_part('content'); ?>
+<?php ESS_Component::the_list_with_create(); ?>
 
 <?php get_footer(); ?>

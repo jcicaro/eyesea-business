@@ -25,66 +25,29 @@ Manual
 
 - Create Custom Fields
 - Set up user and roles
+- Create page for forms
 
 
 ======================================
 Temp
 ======================================
 
-<?php 
-		
-			
-				
-			if ($col_num == 0) { ?> 
-			
-			<a href="<?php // the_permalink(); ?>">
-				<?php echo // get_field($field, $post_id); ?>
-			</a>
-			
-			<?php }
-				elseif ($is_rel) { ?>
-				
-			<a href="<?php // echo get_permalink(get_field($field, $post_id, false); ?>">
-				<?php // echo get_field($field, $post_id); ?>
-			</a>
-			
-			<?php }
-				
-			
-			?>
-			<?php else { ?>
-				<?php 
-					echo get_field($field, $post_id); 
-				?>
-			<?php } ?>
-
-========
-
-public static function the_cell($post_id, $field_obj, $col_num) {
-		$field = $field_obj['name'];
-		$is_rel = $field_obj['is_relationship'] == true;
-		$href = get_the_permalink();
-		if ($is_rel) {
-			$href = get_permalink(get_field($field, $post_id, false));
-		}
-		$show_link = $col_num == 0 || $is_rel;
+?>
+<div class="container">
+	
+	<section class="py-4">
+		<?php 
+		$acf_post_id = is_single() ? get_the_ID() : 'new_post';	
+		$post_type = is_archive() ? get_queried_object()->name : ''; // 'expense';
+		ESS_Component::the_acf_form($acf_post_id, $post_type);
 		?>
-
-		<td>
-			<?php 
-		
-			if ($show_link) { 
-			
-			?>
-			<a href="<?php echo $href; ?>">
-				<?php echo ESS_Helper::to_string(get_field($field, $post_id)); ?>
-			</a>
-			<?php } else { ?>
-				<?php 
-					echo get_field($field, $post_id); 
-				?>
-			<?php } ?>
-		</td>
-
+	</section>
+	
+	<?php if (!is_single()) { ?>
+	<section>
 		<?php
-	}
+		ESS_Component::the_list();
+		?>
+	</section>
+	<?php } ?>
+</div>

@@ -3,3 +3,7 @@
 Theme Name: eyesea-business
 Author: JC Icaro
 */
+
+.alert-primary p {
+    margin-top: 1rem;
+}

@@ -2,23 +2,31 @@
 
 class ESS_Component {
 	
-	public static function the_acf_form($post_id, $post_type) {
+	public static function the_acf_form() {
+
+		$post_id = is_single() ? get_the_ID() : 'new_post';	
+		$post_type = is_single() ? get_post_type($post_id) : get_queried_object()->name; // 'expense';
+		$post_type_label = is_archive() ? get_queried_object()->labels->singular_name : get_post_type_object($post_type)->labels->singular_name; 
+		
 		?>
 		<div class="card">
 			<div class="card-header">
-				<ul class="nav nav-pills card-header-pills">
-					<li class="nav-item">
-						<a class="nav-link active" id="toggle-form" href="#">
-							Toggle Form
-						</a>
-					</li>
-				</ul>
+				<div class="container d-flex justify-content-between align-content-center">
+					<a>
+						<button type="button" class="btn btn-light"><strong><?php echo $post_type_label; ?></strong></button>
+					</a>
+					<span class="pr-3 pt-1">
+						<?php if (is_single()) { the_title(); } ?>
+					</span>
+				</div>
+<!-- 				<h4>
+					<a class="nav-link active" id="toggle-form" href="#">
+					<?php // if (is_single()) { the_title(); } else { echo $post_type_label; } ?>
+					</a>
+				</h4> -->
 			</div>
 			<div class="card-body create-form">
 				<div class="col card-body">
-					<h3>
-						<?php if (is_single()) { the_title(); } ?>
-					</h3>
 					<?php acf_form(array(
 						'post_id'		=> $post_id,
 						'post_title'	=> false,
@@ -54,7 +62,7 @@ class ESS_Component {
 
 			?>
 			<th scope="col">
-				<a href="<?php echo '/' . $post_type . '/?order_key=' . $field . '&order=' . $link_order; ?>">
+				<a class="text-dark" href="<?php echo '/' . $post_type . '/?order_key=' . $field . '&order=' . $link_order; ?>">
 					<?php echo $field_obj['label']; // get_field_object($field)['label'] ?>
 
 					<?php if ($meta_key == $field && $link_order == 'ASC') { ?>
@@ -136,21 +144,15 @@ class ESS_Component {
 
 		<?php 
 		} 
-		wp_reset_query();
-						
+
 	}
 	
 	public static function the_list() {
 		
-		$post_type_label = is_archive() ? get_queried_object()->label : ''; 
-		
 		?>
 		<div class="row table-list">
 			<div class="col">
-				<h3>
-					<?php echo $post_type_label; ?>
-				</h3>
-				
+
 				<table class="table table-striped">
 					<thead>
 						<?php self::the_table_header(); ?>
@@ -159,10 +161,40 @@ class ESS_Component {
 						<?php self::the_table_rows(); ?>
 					<tbody>
 				</table>
+				
+				<div class="d-flex justify-content-center">
+					<?php bootstrap_pagination(); ?>
+				</div>
+				
+				
+				<?php wp_reset_query(); ?>
 			</div>
 
 		</div>
 		<?php
 	}
+	
+	public static function the_list_with_create() {
+		$post_type = is_archive() ? get_queried_object()->name : '';
+		$post_type_label = is_archive() ? get_queried_object()->labels->name : ''; 
+		?>
+
+		<div class="">
+			<div class="container d-flex justify-content-between align-content-center mb-2 pl-0 pr-0">
+				<a>
+					<button type="button" class="btn btn-light"><strong><?php echo $post_type_label; ?></strong></button>
+				</a>
+				<a href="<?php echo '/form/?get_post=new_post&get_type=' . $post_type; ?>">
+					<button type="button" class="btn btn-primary">Create New</button>
+				</a>
+			</div>
+
+
+		<?php ESS_Component::the_list(); // get_template_part('content'); ?>
+
+		</div>
+		<?php
+	}
+	
 }
 

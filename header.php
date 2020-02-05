@@ -59,7 +59,7 @@
 						<a class="nav-link" href="/vendor/">Vendors</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/wp-json/sn/v1/update/all">Test</a>
+						<a class="nav-link" href="/wp-json/sn/v1/update/all">Update Records</a>
 					</li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0">
@@ -68,6 +68,6 @@
 				</form>
 			</div>
 		</nav>
-	<div class="container">
+	<div class="container mt-3">
 
 		
