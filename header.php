@@ -40,31 +40,47 @@
 
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item">
-						<a class="nav-link" href="/expense/">Expenses</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown-income" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  Income
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbar-dropdown-income">
+						  <a class="dropdown-item" href="<?php echo esc_url(site_url('/income/')); ?>">Income</a>
+						  <a class="dropdown-item" href="<?php echo esc_url(site_url('/invoice/')); ?>">Invoices</a>
+						  <a class="dropdown-item" href="<?php echo esc_url(site_url('/workshop/')); ?>">Workshops</a>
+						  <a class="dropdown-item" href="<?php echo esc_url(site_url('/customer/')); ?>">Customers</a>
+						</div>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/income/">Income</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown-expenses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  Expenses
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbar-dropdown-expenses">
+						  <a class="dropdown-item" href="<?php echo esc_url(site_url('/expense/')); ?>">Expenses</a>
+						  <a class="dropdown-item" href="<?php echo esc_url(site_url('/vendor/')); ?>">Vendors</a>
+						</div>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/invoice/">Invoices</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown-integration" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  Integration
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbar-dropdown-integration">
+						  <a class="dropdown-item" href="<?php echo esc_url(site_url('/wp-json/sn/v1/update/all')); ?>">Fetch Records</a>
+						</div>
 					</li>
+					<?php if(!is_user_logged_in()) { ?>
 					<li class="nav-item">
-						<a class="nav-link" href="/workshop/">Workshops</a>
+						<a class="nav-link" href="<?php echo wp_login_url(home_url()); ?>">Login</a>
 					</li>
+					<?php } else { ?>
 					<li class="nav-item">
-						<a class="nav-link" href="/customer/">Customers</a>
+						<a class="nav-link" href="<?php echo wp_logout_url(home_url()); ?>">Logout</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/vendor/">Vendors</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/wp-json/sn/v1/update/all">Update Records</a>
-					</li>
+					<?php } ?>
 				</ul>
 				<form class="form-inline my-2 my-lg-0" method="GET" action="<?php echo esc_url(site_url('/')); ?>">
 					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="s">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
 				</form>
 			</div>
 		</nav>

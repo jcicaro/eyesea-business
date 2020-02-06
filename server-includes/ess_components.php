@@ -142,14 +142,14 @@ class ESS_Component {
 
 		<?php 
 		} 
-
+ 		
 	}
 	
 	public static function the_list() {
 		
 		?>
 		<div class="row table-list">
-			<div class="col">
+			<div class="col table-responsive">
 
 				<table class="table table-striped">
 					<thead>

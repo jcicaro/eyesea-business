@@ -1,7 +1,6 @@
 <?php get_header(); ?>
 
-<table class="table table-striped">
-    <tbody>
+<ul class="list-group">
         
 <?php
 //     echo ESS_SnHelper::getCompanies();
@@ -9,28 +8,38 @@
 while(have_posts()) { 
     the_post(); 
     $post_id = get_the_ID(); 
+    $post_type = get_post_type($post_id);
+    $class_name = ESS_Post::get_class_name($post_type);
+	$fields = call_user_func($class_name . '::get_list_fields');
     ?>
     
 
-<tr>
-    <td>
-        <a href="<?php the_permalink(); ?>">
-            <?php echo get_post_type_object(get_post_type(get_the_ID()))->labels->singular_name; ?>
-        </a>
-    </td>
-    <td>
+
+<li class="list-group-item">
+    <div>
         <a href="<?php the_permalink(); ?>">
             <?php the_title(); ?>
         </a>
-    </td>
-</tr>
+        <span class="badge badge-secondary"><?php 
+        echo get_post_type_object(get_post_type(get_the_ID()))->labels->singular_name; 
+        ?></span>
+    </div>
+    <div>
+        <?php
+    foreach ($fields as $i=>$field_obj) { 
+        ESS_Component::the_cell($post_id, $field_obj, $i);
+    } 
+    ?>
+    </div>
+    
+</li>
+
         
 
 <?php
 }
 ?>
         
-    <tbody>
-</table>
+</ul>
 
 <?php get_footer(); ?>
