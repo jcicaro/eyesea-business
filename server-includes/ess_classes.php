@@ -21,15 +21,28 @@ class ESS_RestHelper {
 	}
 }
 
+interface ESS_PostChild {
+	public static function get_list_fields();
+	public static function update_record($post_id, $meta);
+	public static function get_external_records();
+	public static function upsert_record($meta);
+}
 
-class ESS_Post {
+interface ESS_ExtIntegration {
+	public static function get_external_records();
+	public static function update_records_from_external();
+}
+
+
+class ESS_Post implements ESS_PostChild {
 	
 	public static $post_type = 'post';
 	
-// 	abstract public static function get_fields();
-// 	abstract public static function update_record($post_id, $meta);
-// 	abstract public static function get_external_records();
-// 	abstract public static function upsert_record($post_type, $meta);
+	// Below methods should be implemented by children
+	public static function get_list_fields() {}
+	public static function update_record($post_id, $meta) {}
+	public static function get_external_records() {}
+	public static function upsert_record($meta) {}
 	
 	
 	public static function execute_set_title($post_id) {
@@ -107,7 +120,10 @@ class ESS_Post {
 			'customer' => 'ESS_Customer',
 			'vendor' => 'ESS_Vendor'
 		];
-		return $map[$post_type];
+		if(array_key_exists($post_type, $map)) {
+			return $map[$post_type];
+		}
+		return '';
 	}
 	
 	
@@ -137,7 +153,7 @@ class ESS_Post {
 }
 
 
-class ESS_Expense extends ESS_Post {
+class ESS_Expense extends ESS_Post implements ESS_PostChild, ESS_ExtIntegration {
 	
 	public static $post_type = 'expense';
 	
@@ -191,7 +207,7 @@ class ESS_Expense extends ESS_Post {
 }
 
 
-class ESS_Income extends ESS_Post {
+class ESS_Income extends ESS_Post implements ESS_PostChild, ESS_ExtIntegration {
 	
 	public static $post_type = 'income';
 	
@@ -254,7 +270,7 @@ class ESS_Income extends ESS_Post {
 }
 
 
-class ESS_Invoice extends ESS_Post {
+class ESS_Invoice extends ESS_Post implements ESS_PostChild, ESS_ExtIntegration {
 	
 	public static $post_type = 'invoice';
 	
@@ -313,7 +329,7 @@ class ESS_Invoice extends ESS_Post {
 }
 
 
-class ESS_Workshop extends ESS_Post {
+class ESS_Workshop extends ESS_Post implements ESS_PostChild, ESS_ExtIntegration {
 	
 	public static $post_type = 'workshop';
 	
@@ -360,7 +376,7 @@ class ESS_Workshop extends ESS_Post {
 }
 
 
-class ESS_Customer extends ESS_Post {
+class ESS_Customer extends ESS_Post implements ESS_PostChild, ESS_ExtIntegration {
 	
 	public static $post_type = 'customer';
 	
@@ -414,7 +430,7 @@ class ESS_Customer extends ESS_Post {
 }
 
 
-class ESS_Vendor extends ESS_Post {
+class ESS_Vendor extends ESS_Post implements ESS_PostChild, ESS_ExtIntegration {
 	
 	public static $post_type = 'vendor';
 	
