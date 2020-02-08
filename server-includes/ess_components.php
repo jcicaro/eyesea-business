@@ -10,18 +10,19 @@ class ESS_Component {
 		<div class="card">
 			<div class="card-header">
 				<div class="container d-flex justify-content-between align-content-center">
-					<a>
-						<button type="button" class="btn btn-light"><strong><?php echo $post_type_label; ?></strong></button>
-					</a>
+					<span class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle btn-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							<strong><?php echo $post_type_label; ?></strong>
+						</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="<?php echo esc_url(site_url('/form/?get_post=new_post&get_type=' . $post_type)); ?>">Create new</a>
+						  	<a class="dropdown-item" href="<?php echo esc_url(site_url('/' . $post_type . '/')); ?>">Back to list</a>
+						</div>
+					</span>
 					<span class="pr-3 pt-1">
 						<?php if (is_single()) { the_title(); } ?>
 					</span>
 				</div>
-<!-- 				<h4>
-					<a class="nav-link active" id="toggle-form" href="#">
-					<?php // if (is_single()) { the_title(); } else { echo $post_type_label; } ?>
-					</a>
-				</h4> -->
 			</div>
 			<div class="card-body create-form">
 				<div class="col card-body">
@@ -33,7 +34,7 @@ class ESS_Component {
 						'html_submit_button'  => '<div class="acf-fields"><div class="acf-field"><input type="submit" class="acf-button button button-primary button-large btn btn-primary"" value="%s" /></div></div>',
 						'new_post'		=> array(
 							'post_type'		=> $post_type,
-							'post_status'	=> 'publish'
+							'post_status'	=> 'private'
 						)
 					)); ?>
 				</div>
@@ -80,12 +81,12 @@ class ESS_Component {
 	}
 	
 	
-	public static function the_cell($post_id, $field_obj, $col_num) {
+	public static function the_cell($post_id, $field_obj, $col_num, $is_td=false) {
 		$field = $field_obj['name'];
 		$is_rel = $field_obj['is_relationship'] == true;
 		?>
 
-		<td>
+		<?php if($is_td) { echo '<td>'; } else { echo '<span>'; } ?>
 			<?php if ($col_num == 0) { ?> 
 			
 			<a href="<?php the_permalink(); ?>">
@@ -107,7 +108,9 @@ class ESS_Component {
 			<?php echo get_field($field, $post_id); ?>
 			
 			<?php } ?>
-		</td>
+		
+		<?php if($is_td) { echo '</td>'; } else { echo '</span>'; }  ?>
+
 
 		<?php
 	}
@@ -136,7 +139,7 @@ class ESS_Component {
 		<tr>
 			<?php 
 			foreach ($fields as $i=>$field_obj) { 
-				self::the_cell($post_id, $field_obj, $i);
+				self::the_cell($post_id, $field_obj, $i, true);
 			} ?>
 		</tr>
 
@@ -161,7 +164,7 @@ class ESS_Component {
 				</table>
 				
 				<div class="d-flex justify-content-center">
-					<?php bootstrap_pagination(); ?>
+					<?php self::bootstrap_pagination(); ?>
 				</div>
 				
 				
@@ -179,11 +182,17 @@ class ESS_Component {
 
 		<div class="">
 			<div class="container d-flex justify-content-between align-content-center mb-2 pl-0 pr-0">
-				<a>
-					<button type="button" class="btn btn-light"><strong><?php echo $post_type_label; ?></strong></button>
-				</a>
+				<span class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle btn-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						<strong><?php echo $post_type_label; ?></strong>
+					</a>
+					<div class="dropdown-menu">
+					  <a class="dropdown-item" href="<?= '/wp-json/sn/v1/update/' . $post_type ?>">Fetch records</a>
+					</div>
+				</span>
+				
 				<a href="<?php echo '/form/?get_post=new_post&get_type=' . $post_type; ?>">
-					<button type="button" class="btn btn-primary">Create New</button>
+					<button type="button" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></button>
 				</a>
 			</div>
 
@@ -193,6 +202,47 @@ class ESS_Component {
 		</div>
 		<?php
 	}
+	
+	/*
+	 * custom pagination with bootstrap .pagination class
+	 * source: http://www.ordinarycoder.com/paginate_links-class-ul-li-bootstrap/
+	 */
+	public static function bootstrap_pagination( $echo = true ) {
+		global $wp_query;
+
+		$big = 999999999; // need an unlikely integer
+
+		$pages = paginate_links( array(
+				'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+				'format' => '?paged=%#%',
+				'current' => max( 1, get_query_var('paged') ),
+				'total' => $wp_query->max_num_pages,
+				'type'  => 'array',
+				'prev_next'   => true,
+				'prev_text'    => __('« Prev'),
+				'next_text'    => __('Next »'),
+			)
+		);
+
+		if( is_array( $pages ) ) {
+			$paged = ( get_query_var('paged') == 0 ) ? 1 : get_query_var('paged');
+
+			$pagination = '<ul class="pagination pagination-sm">';
+
+			foreach ( $pages as $page ) {
+				$pagination .= '<li class="page-item">' . $page . '</li>';
+			}
+
+			$pagination .= '</ul>';
+
+			if ( $echo ) {
+				echo $pagination;
+			} else {
+				return $pagination;
+			}
+		}
+	}
+
 	
 }
 

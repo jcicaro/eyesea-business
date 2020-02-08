@@ -40,6 +40,8 @@
 
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					
+					<?php if(is_user_logged_in()) { ?>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown-income" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						  Income
@@ -68,6 +70,8 @@
 						  <a class="dropdown-item" href="<?php echo esc_url(site_url('/wp-json/sn/v1/update/all')); ?>">Fetch Records</a>
 						</div>
 					</li>
+					<?php } ?>
+					
 					<?php if(!is_user_logged_in()) { ?>
 					<li class="nav-item">
 						<a class="nav-link" href="<?php echo wp_login_url(home_url()); ?>">Login</a>
@@ -77,6 +81,7 @@
 						<a class="nav-link" href="<?php echo wp_logout_url(home_url()); ?>">Logout</a>
 					</li>
 					<?php } ?>
+					
 				</ul>
 				<form class="form-inline my-2 my-lg-0" method="GET" action="<?php echo esc_url(site_url('/')); ?>">
 					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="s">

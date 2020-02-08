@@ -57,7 +57,7 @@ while(have_posts()) {
 </ul>
 
 <div class="d-flex justify-content-center">
-	<?php bootstrap_pagination(); ?>
+	<?php ESS_Component::bootstrap_pagination(); ?>
 </div>
 
 <?php get_footer(); ?>

@@ -3,6 +3,8 @@
 URLs
 ======================================
 
+https://wp-eye-sea-jci.codeanyapp.com/
+
 https://wpmain-jci.codeanyapp.com/wp-login.php
 
 https://wpmain-jci.codeanyapp.com/?post_type=expense

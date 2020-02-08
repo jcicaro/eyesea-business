@@ -25,12 +25,6 @@ add_action( 'rest_api_init', function () {
 			ESS_Invoice::update_records_from_external();
 			ESS_Income::update_records_from_external();
 			ESS_Expense::update_records_from_external();
-// 			ESS_SnHelper::getHandler('vendor');
-// 			ESS_SnHelper::getHandler('customer');
-// 			ESS_SnHelper::getHandler('workshop');
-// 			ESS_SnHelper::getHandler('invoice');
-// 			ESS_SnHelper::getHandler('income');
-// 			ESS_SnHelper::getHandler('expense');
 			
 			return 'Finished!';
 		}
