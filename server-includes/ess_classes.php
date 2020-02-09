@@ -49,7 +49,10 @@ class ESS_Post implements ESS_PostChild {
 		$post_type = get_post_type($post_id);
 		$class_name = self::get_class_name($post_type);
 		
-		call_user_func($class_name . '::set_title', $post_id);
+		if ($class_name) {
+			call_user_func($class_name . '::set_title', $post_id);
+		}
+		
 	}
 	
 	public static function execute_upsert_record($class_name, $post_type, $meta) {

@@ -34,22 +34,8 @@ Manual
 Temp
 ======================================
 
-?>
-<div class="container">
-	
-	<section class="py-4">
-		<?php 
-		$acf_post_id = is_single() ? get_the_ID() : 'new_post';	
-		$post_type = is_archive() ? get_queried_object()->name : ''; // 'expense';
-		ESS_Component::the_acf_form($acf_post_id, $post_type);
-		?>
-	</section>
-	
-	<?php if (!is_single()) { ?>
-	<section>
-		<?php
-		ESS_Component::the_list();
-		?>
-	</section>
-	<?php } ?>
-</div>
+<?php if($main_image) {  ?>
+				<img class="img-fluid w-100 img-mh-md" src="<?php echo esc_url($main_image['sizes']['large']); ?>" alt="<?php echo esc_attr($main_image['alt']); ?>" data-aos="fade" data-aos-delay="100">
+			<?php } else { ?>
+            	<img class="img-fluid w-100 img-mh-md" src="<?php the_sub_field('image_url'); ?>" alt="" data-aos="fade" data-aos-delay="100">
+			<?php } ?>
