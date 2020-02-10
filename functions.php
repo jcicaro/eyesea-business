@@ -4,8 +4,6 @@ require_once(get_template_directory() . '/server-includes/ess_custom_post_types.
 
 require_once(get_template_directory() . '/server-includes/ess_classes.php');
 
-require_once(get_template_directory() . '/server-includes/ess_helpers.php');
-
 require_once(get_template_directory() . '/server-includes/ess_rest.php');
 
 require_once(get_template_directory() . '/server-includes/ess_fixes.php');
@@ -24,6 +22,9 @@ add_action('wp_enqueue_scripts', function() {
 	wp_enqueue_style('animate-css', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css', array());
     wp_enqueue_style('aos-css', 'https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css', array());
 	
+	// Lightbox Gallery
+	wp_enqueue_style('ekko-lightbox-css', 'https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css', array());
+	
 	wp_enqueue_style('main', get_template_directory_uri() . '/public/css/main.css', false, rand(1, 100), 'all');
 
 });
@@ -39,6 +40,9 @@ add_action('wp_enqueue_scripts', function() {
 	wp_enqueue_script('smart-forms', get_template_directory_uri() . '/public/js/vendor/smart-forms.min.js', array(), '1.0', $show_in_footer);
 	
 	wp_enqueue_script('aos-js', 'https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.js', array(), '2.2.0', $show_in_footer);
+	
+	// Lightbox Gallery
+	wp_enqueue_script('ekko-lightbox-js', 'https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js', array(), '5.3.0', $show_in_footer);
 	
 	wp_enqueue_script('script', get_template_directory_uri() . '/public/js/index.js', array(), rand(1, 100), $show_in_footer);
 });

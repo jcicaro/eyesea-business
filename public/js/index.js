@@ -23,6 +23,15 @@
 			AOS.refresh();
 		});
 		
+		// ekko-lightbox
+		$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+			event.preventDefault();
+			$(this).ekkoLightbox({
+				alwaysShowClose: true
+			});
+		});
+		
+		
 		// Add classes on sm screen size
 		
 // 		var wmmSm = window.matchMedia("(max-width: 768px)")

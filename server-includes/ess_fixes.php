@@ -1,8 +1,8 @@
 <?php
 // remove the 32px margin at the top
-add_action('get_header', function() {
+// add_action('get_header', function() {
 // 	remove_action('wp_head', '_admin_bar_bump_cb');
-}); 
+// }); 
 
 // Remove admin bar on the front end
 // add_filter('show_admin_bar', '__return_false');
@@ -12,15 +12,14 @@ add_theme_support('post-thumbnails');
 
 
 // show private posts on the front end
-add_action('pre_get_posts',function($query){
+// add_action('pre_get_posts',function($query){
 //     if( is_admin() || ! $query->is_main_query() ) return;
 //         if( current_user_can('edit_private_posts') ) {
-	if (in_array('administrator',  wp_get_current_user()->roles)) {
-		$query->set('post_status', array('private','publish'));
-	}
-            
+// 	if (in_array('administrator',  wp_get_current_user()->roles)) {
+// 		$query->set('post_status', array('private','publish', 'inherited'));
+// 	}
 //         }
-});
+// });
 
 // remove "Private: " from titles
 add_filter('the_title', function($title) {

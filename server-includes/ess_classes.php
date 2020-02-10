@@ -98,12 +98,12 @@ class ESS_Post implements ESS_PostChild {
 
 		// Remove the hook to avoid infinite loop. Please make sure that it has
 		// the same priority (20)
-		remove_action('acf/save_post', 'my_save_post', 20);
+		remove_action('acf/save_post', ['ESS_Post', 'execute_set_title'], 20);
 
 		wp_update_post($post);
 
 		// Add the hook back
-		add_action('acf/save_post', 'my_save_post', 20);
+		add_action('acf/save_post', ['ESS_Post', 'execute_set_title'], 20);
 		
 	}
 	
