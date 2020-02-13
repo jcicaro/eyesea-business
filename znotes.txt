@@ -28,6 +28,7 @@ Manual
 - Create Custom Fields
 - Set up user and roles
 - Create page for forms
+- Create page for gallery, set the template as "Gallery" on the pages
 
 
 ======================================
