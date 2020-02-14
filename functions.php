@@ -5,7 +5,7 @@
 // require_once(get_template_directory() . '/server-includes/ess_classes.php');
 // require_once(get_template_directory() . '/server-includes/ess_rest.php');
 // require_once(get_template_directory() . '/server-includes/ess_fixes.php');
-// require_once(get_template_directory() . '/server-includes/ess_components.php');
+require_once(get_template_directory() . '/server-includes/ess_components.php');
 
 add_action('wp_enqueue_scripts', function() {
 

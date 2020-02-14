@@ -1,11 +1,13 @@
-<?php get_header(); ?>
-
-<?php
+<?php 
 /**
 * Template Name: Form
 *
 * @package WordPress
 */
+
+get_header(); ?>
+
+<?php
 
 // https://wp-eye-sea-jci.codeanyapp.com/form/?get_post=new_post&get_type=income
 
