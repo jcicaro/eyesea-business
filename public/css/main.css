@@ -1,0 +1,109 @@
+
+/* @import url('https://fonts.googleapis.com/css?family=Aguafina+Script&display=swap'); */
+@import url('https://fonts.googleapis.com/css?family=Pinyon+Script&display=swap');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans&display=swap');
+
+body {
+    font-family: 'PT Sans', sans-serif;
+}
+
+
+
+/**********************
+ General
+**********************/
+
+.alert-primary p {
+    margin-top: 1rem;
+}
+
+.img-mh-md {
+   max-height: 530px;
+   object-fit: cover;
+}
+
+.lead-text {
+/*     font-family: 'Aguafina Script', cursive; */
+    font-family: 'Pinyon Script', cursive;
+}
+
+
+/**********************
+ Footer
+**********************/
+
+.footer a {
+    color: black;
+    text-decoration: underline;
+}
+
+.footer a:hover {
+    color: grey;
+}
+
+
+/**********************
+ Backgrounds
+**********************/
+
+.bg-50 {
+   background-color: rgba(0, 0, 0, 0.7) !important;
+   color: white;
+}
+
+.bg-black {
+    background-color: black;
+    color: white;
+}
+
+
+/**********************
+ Nav 
+**********************/
+
+.nav.gallery-nav .nav-item .nav-link {
+    color: black;
+}
+
+.nav.gallery-nav .nav-item .nav-link.active {
+    background-color: black;
+    color: white;
+}
+
+
+/**********************
+ Form (Contact Me)
+**********************/
+
+.contact-clean form .btn.bg-black {
+    background-color: black;
+    color: white;
+}
+
+.contact-clean form h2 {
+    color: black;
+}
+
+.custom-select.is-invalid:focus, .contact-clean form .form-control.is-invalid:focus, .was-validated .custom-select:invalid:focus, .was-validated .form-control:invalid:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0,0,0,.25)
+}
+
+
+/**********************
+ Gallery
+**********************/
+
+.ekko-lightbox .modal-content {
+    border: none;
+    box-shadow: 0px 0px 8px 0px rgba(255,255,255,1);
+}
+
+.ekko-lightbox .modal-header {
+    background-color: black;
+    color: white;
+}
+
+.ekko-lightbox .close {
+    color: white;
+    opacity: 0.7;
+}
