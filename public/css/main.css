@@ -54,6 +54,12 @@ body {
 .bg-black {
     background-color: black;
     color: white;
+    border: thin solid black;
+}
+
+.btn.bg-black:hover {
+    background-color: grey;
+    border: thin solid grey;
 }
 
 
@@ -85,7 +91,7 @@ body {
 }
 
 .custom-select.is-invalid:focus, .contact-clean form .form-control.is-invalid:focus, .was-validated .custom-select:invalid:focus, .was-validated .form-control:invalid:focus {
-    box-shadow: 0 0 0 0.2rem rgba(0,0,0,.25)
+    box-shadow: 0 0 0 0.2rem rgba(0,0,0,.25);
 }
 
 
@@ -101,6 +107,10 @@ body {
 .ekko-lightbox .modal-header {
     background-color: black;
     color: white;
+}
+
+.ekko-lightbox .modal-header .modal-title {
+    font-family: 'Pinyon Script', cursive;
 }
 
 .ekko-lightbox .close {

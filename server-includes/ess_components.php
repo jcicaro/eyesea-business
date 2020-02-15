@@ -196,7 +196,7 @@ class ESS_Component {
 				</span>
 				
 				<a href="<?php echo '/form/?get_post=new_post&get_type=' . $post_type; ?>">
-					<button type="button" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></button>
+					<button type="button" class="btn btn-primary bg-black"><i class="fa fa-plus" aria-hidden="true"></i></button>
 				</a>
 			</div>
 
@@ -247,6 +247,75 @@ class ESS_Component {
 		}
 	}
 	
+	/*******************************************
+	* Public site - General 
+	********************************************/
+	
+	public static function the_home_button_links() {
+		?>
+
+		<div>
+			<?php if( have_rows('button_links') ): ?>
+			<?php while ( have_rows('button_links') ) : the_row();  ?>
+			<a href="<?php the_sub_field('link'); ?>" target="<?php the_sub_field('target'); ?>"><button class="btn btn-outline-light"><?php the_sub_field('button_label'); ?></button></a>
+
+			<?php endwhile; ?>
+			<?php endif; ?>	
+		</div>
+
+		<?php
+	}
+	
+	public static function the_page_section_description() {
+		?>
+
+		<h3 class="lead-text"><?php the_sub_field('lead_text'); ?></h3>
+		<p><?php the_sub_field('sub_text'); ?></p>
+
+		
+	<?php if( have_rows('paragraphs') ): ?>
+	<div>
+		<?php while ( have_rows('paragraphs') ) : the_row();  ?>
+
+		<p>
+			<small>
+				<?php the_sub_field('paragraph'); ?>
+			</small>
+			
+		</p>
+
+		<?php endwhile; ?>
+	</div>
+	<?php endif; ?>	
+		
+
+		<?php self::the_home_button_links(); ?>
+
+		<?php
+	}
+	
+	public static function the_home_section_description() {
+		?>
+
+		<h3 class="lead-text"><?php the_sub_field('lead_text'); ?></h3>
+		<p><?php the_sub_field('sub_text'); ?></p>
+		<?php self::the_home_button_links(); ?>
+
+		<?php
+	}
+	
+	public static function the_home_section_main_image($main_image) {
+		?>
+
+			<?php if($main_image) {  ?>
+				<img class="img-fluid w-100 h-100 img-mh-md" src="<?php echo esc_url($main_image['sizes']['large']); ?>" alt="<?php echo esc_attr($main_image['alt']); ?>" data-aos="fade" data-aos-delay="100">
+			<?php } else { ?>
+				<img class="img-fluid w-100 img-mh-md" src="<?php the_sub_field('image_url'); ?>" alt="" data-aos="fade" data-aos-delay="100">
+			<?php } ?>
+
+		<?php
+	}
+	
 	
 	
 	/*******************************************
@@ -269,28 +338,14 @@ class ESS_Component {
 		<section class="home-item row no-gutters bg-black">
 
 			<div class="home-item-txt-container col-md-6 p-5 d-flex flex-column align-self-center p-5 <?= $reverse_order_class ?>"  data-aos="fade-right" data-aos-delay="100">
-				<h3 class="lead-text"><?php the_sub_field('lead_text'); ?></h3>
-				<p><?php the_sub_field('sub_text'); ?></p>
-				<div>
-					<?php if( have_rows('button_links') ): ?>
-					<?php while ( have_rows('button_links') ) : the_row();  ?>
-					<a href="<?php the_sub_field('link'); ?>" target="<?php the_sub_field('target'); ?>"><button class="btn btn-outline-light"><?php the_sub_field('button_label'); ?></button></a>
-
-					<?php endwhile; ?>
-					<?php endif; ?>	
-				</div>
+				
+				<?php self::the_home_section_description(); ?>
 
 			</div>
 
 			<div class="home-item-img-container col-md-6">
-				<?php if($main_image) {  ?>
-					<img class="img-fluid w-100 img-mh-md" src="<?php echo esc_url($main_image['sizes']['large']); ?>" alt="<?php echo esc_attr($main_image['alt']); ?>" data-aos="fade" data-aos-delay="100">
-				<?php } else { ?>
-					<img class="img-fluid w-100 img-mh-md" src="<?php the_sub_field('image_url'); ?>" alt="" data-aos="fade" data-aos-delay="100">
-				<?php } ?>
+				<?php self::the_home_section_main_image($main_image); ?>
 			</div>
-
-
 
 		</section>
 
@@ -309,6 +364,30 @@ class ESS_Component {
         <div class="form-group contact-submit"><button class="btn bg-black" type="submit">send </button></div>
     </form>
 </div>
+
+		<?php
+	}
+	
+	/*******************************************
+	* Public site - Page General
+	********************************************/
+	
+	public static function the_page_general_section($main_image, $reverse_order_class) { 
+		?>
+
+		<section class="home-item row no-gutters bg-black">
+
+			<div class="home-item-txt-container col-md-6 p-5 d-flex flex-column align-self-center p-5 <?= $reverse_order_class ?>"  data-aos="fade-right" data-aos-delay="100">
+				
+				<?php self::the_page_section_description(); ?>
+
+			</div>
+
+			<div class="home-item-img-container col-md-6">
+				<?php self::the_home_section_main_image($main_image); ?>
+			</div>
+
+		</section>
 
 		<?php
 	}
@@ -368,8 +447,7 @@ class ESS_Component {
 		<section class="home-item row no-gutters bg-black">
 		
 			<div class="home-item-txt-container col-md-6 p-5 d-flex flex-column align-self-center p-5 <?= $reverse_order_class ?>"  data-aos="fade-right" data-aos-delay="100">
-				<h3 class="lead-text"><?php the_sub_field('lead_text'); ?></h3>
-				<p><?php the_sub_field('sub_text'); ?></p>
+				<?php self::the_home_section_description(); ?>
 			</div>
 
 			<div class="home-item-img-container col-md-6">
@@ -382,8 +460,8 @@ class ESS_Component {
 							<?php foreach( $images as $image ): ?>
 
 									<div class="col-<?php echo $col_num; ?>">
-										<a href="<?php echo esc_url($image['url']); ?>" data-toggle="lightbox" data-title="<?php echo esc_attr($image['title']); ?>">
-										 <img class="img-fluid w-100 h-100 img-thumbnail" style="object-fit: cover;" src="<?php echo esc_url($image['sizes'][$img_size]); ?>" alt="<?php echo esc_attr($image['alt']); ?>" data-aos="fade-in" data-aos-delay="100" />
+										<a href="<?php echo esc_url($image['sizes']['large']); // esc_url($image['url']); ?>" data-toggle="lightbox" data-title="<?php echo esc_attr($image['title']); ?>">
+										 <img class="img-fluid w-100 h-100" style="object-fit: cover;" src="<?php echo esc_url($image['sizes'][$img_size]); ?>" alt="<?php echo esc_attr($image['alt']); ?>" data-aos="fade-in" data-aos-delay="100" />
 										</a>
 									</div>
 
